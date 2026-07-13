@@ -85,4 +85,18 @@ class FuncionarioApplicationServiceTest {
         verify(funcionarioRepository, times(1)).retornarFuncionarioPorId(any());
         assertEquals(funcionarioResponse.getId(), funcionarioSingleResponse.getId());
     }
+
+    @Test
+    void erroAoRetornarFuncionarioSingular() {
+        Funcionario funcionario = DataHelper.createFuncionario();
+
+        when(funcionarioRepository.retornarFuncionarioPorId(any())).thenReturn(Optional.empty());
+
+        APIException exception = assertThrows(APIException.class, () -> {
+            service.retornarFuncionario(funcionario.getId());
+        });
+
+        verify(funcionarioRepository, times(1)).retornarFuncionarioPorId(any());
+        assertEquals(HttpStatus.NOT_FOUND, exception.getStatusException());
+    }
 }
