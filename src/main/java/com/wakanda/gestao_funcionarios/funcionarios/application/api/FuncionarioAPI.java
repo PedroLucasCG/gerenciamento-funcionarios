@@ -15,5 +15,5 @@ public interface FuncionarioAPI {
 
     @GetMapping(value = "/todos")
     @ResponseStatus(HttpStatus.OK)
-    List<FuncionarioSimpleResponse> criarTodosFuncionarios();
+    List<FuncionarioSimpleResponse> recuperarTodosFuncionarios();
 }

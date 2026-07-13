@@ -23,11 +23,11 @@ public class FuncionarioRestController implements FuncionarioAPI {
     }
 
     @Override
-    public List<FuncionarioSimpleResponse> criarTodosFuncionarios() {
+    public List<FuncionarioSimpleResponse> recuperarTodosFuncionarios() {
         log.info("[inicio] FuncionarioRestController - criarTodosFuncionarios");
         List<FuncionarioSimpleResponse> funcionarioSimpleResponses
                 = funcionarioApplicationService.retornarTodosFuncionarios();
         log.info("[finaliza] FuncionarioRestController - criarTodosFuncionarios");
-        return List.of();
+        return funcionarioSimpleResponses;
     }
 }
