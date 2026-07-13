@@ -109,4 +109,36 @@ class FuncionarioApplicationServiceTest {
         verify(funcionarioRepository, times(1)).retornarFuncionarioPorId(any());
         assertEquals(funcionarioRetorno.getNome(), funcionarioAtualizarRequest.getNome());
     }
+
+    @Test
+    void erro404NoAtualizarFuncionario() {
+        Funcionario funcionario = DataHelper.createFuncionario();
+        FuncionarioAtualizarRequest funcionarioAtualizarRequest = DataHelper.createFuncionarioAtualizarRequest();
+
+        when(funcionarioRepository.retornarFuncionarioPorId(any())).thenReturn(Optional.empty());
+
+        APIException exception = assertThrows(APIException.class, () -> {
+            service.atualizarFuncionario(funcionario.getId(), funcionarioAtualizarRequest);
+        });
+
+        verify(funcionarioRepository, times(1)).retornarFuncionarioPorId(any());
+        assertEquals(HttpStatus.NOT_FOUND, exception.getStatusException());
+    }
+
+    @Test
+    void erroAoSalvarFuncionarioAtualizado() {
+        Funcionario funcionario = DataHelper.createFuncionario();
+        FuncionarioAtualizarRequest funcionarioAtualizarRequest = DataHelper.createFuncionarioAtualizarRequest();
+
+        when(funcionarioRepository.salvarFuncionario(any())).thenReturn(Optional.empty());
+        when(funcionarioRepository.retornarFuncionarioPorId(any())).thenReturn(Optional.of(funcionario));
+
+        APIException exception = assertThrows(APIException.class, () -> {
+            service.atualizarFuncionario(funcionario.getId(), funcionarioAtualizarRequest);
+        });
+
+        verify(funcionarioRepository, times(1)).salvarFuncionario(any());
+        verify(funcionarioRepository, times(1)).retornarFuncionarioPorId(any());
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, exception.getStatusException());
+    }
 }
