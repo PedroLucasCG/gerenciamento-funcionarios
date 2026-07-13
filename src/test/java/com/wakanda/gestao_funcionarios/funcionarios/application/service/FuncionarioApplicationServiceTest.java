@@ -108,6 +108,7 @@ class FuncionarioApplicationServiceTest {
         verify(funcionarioRepository, times(1)).salvarFuncionario(any());
         verify(funcionarioRepository, times(1)).retornarFuncionarioPorId(any());
         assertEquals(funcionarioRetorno.getNome(), funcionarioAtualizarRequest.getNome());
+        assertEquals(funcionarioRetorno.getId(), funcionario.getId());
     }
 
     @Test
@@ -140,5 +141,18 @@ class FuncionarioApplicationServiceTest {
         verify(funcionarioRepository, times(1)).salvarFuncionario(any());
         verify(funcionarioRepository, times(1)).retornarFuncionarioPorId(any());
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, exception.getStatusException());
+    }
+
+    @Test
+    void excluirFuncionarioComSucesso() {
+        Funcionario funcionario = DataHelper.createFuncionario();
+
+        when(funcionarioRepository.retornarFuncionarioPorId(any())).thenReturn(Optional.of(funcionario));
+
+        Funcionario funcionarioRetorno = service.deletarFuncionario(funcionario.getId());
+
+        verify(funcionarioRepository, times(1)).deletarFuncionario(any());
+        verify(funcionarioRepository, times(1)).retornarFuncionarioPorId(any());
+        assertEquals(funcionarioRetorno.getId(), funcionario.getId());
     }
 }
