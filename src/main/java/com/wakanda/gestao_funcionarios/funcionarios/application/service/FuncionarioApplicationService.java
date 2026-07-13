@@ -4,6 +4,7 @@ import com.wakanda.gestao_funcionarios.funcionarios.application.api.FuncionarioS
 import com.wakanda.gestao_funcionarios.funcionarios.application.api.FuncionarioSalvoResponse;
 import com.wakanda.gestao_funcionarios.funcionarios.domain.Funcionario;
 import com.wakanda.gestao_funcionarios.funcionarios.infra.FuncionarioRepository;
+import com.wakanda.gestao_funcionarios.handler.APIException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
@@ -19,8 +20,8 @@ public class FuncionarioApplicationService implements FuncionarioService {
     public FuncionarioSalvoResponse salvarFuncionario(FuncionarioSalvarRequest funcionarioSalvarRequest) {
         log.info("[inicio] FuncionarioApplicationService - salvarFuncionario");
         Funcionario funcionario = new Funcionario(funcionarioSalvarRequest);
-        Funcionario funcionarioSalvo = funcionarioRepository.salvarFuncionario(funcionario)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR));
+        Funcionario funcionarioSalvo = funcionarioRepository.salvarFuncionario(funcionario).orElseThrow(
+                () -> APIException.build(HttpStatus.INTERNAL_SERVER_ERROR, "Erro ao salvar funcionario"));
 
         FuncionarioSalvoResponse funcionarioSalvoResponse = new FuncionarioSalvoResponse(funcionarioSalvo);
         log.info("[finaliza] FuncionarioApplicationService - salvarFuncionario");

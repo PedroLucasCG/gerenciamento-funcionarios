@@ -2,12 +2,14 @@ package com.wakanda.gestao_funcionarios.funcionarios.application.api;
 
 import com.wakanda.gestao_funcionarios.funcionarios.domain.Designacao;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class FuncionarioSalvarRequest {
     private String nome;
     private Designacao designacao;
