@@ -17,11 +17,12 @@ import java.util.UUID;
 @Service
 public class FuncionarioApplicationService implements FuncionarioService {
     private final FuncionarioRepository funcionarioRepository;
+
     @Override
     public FuncionarioSalvoResponse salvarFuncionario(FuncionarioSalvarRequest funcionarioSalvarRequest) {
         log.info("[inicio] FuncionarioApplicationService - salvarFuncionario");
         Funcionario funcionario = new Funcionario(funcionarioSalvarRequest);
-        Funcionario funcionarioSalvo = persisteFuncionario(funcionario);
+        Funcionario funcionarioSalvo = persistirFuncionario(funcionario);
         FuncionarioSalvoResponse funcionarioSalvoResponse = new FuncionarioSalvoResponse(funcionarioSalvo);
         log.info("[finaliza] FuncionarioApplicationService - salvarFuncionario");
         return funcionarioSalvoResponse;
@@ -52,11 +53,12 @@ public class FuncionarioApplicationService implements FuncionarioService {
         log.info("[inicio] FuncionarioApplicationService - atualizarFuncionario");
         Funcionario funcionario = encontrarFuncionario(idFuncionario);
         funcionario.atualizar(funcionarioAtualizarRequest);
+        Funcionario funcionarioAtualizado = persistirFuncionario(funcionario);
         log.info("[finaliza] FuncionarioApplicationService - atualizarFuncionario");
-        return null;
+        return funcionarioAtualizado;
     }
 
-    private Funcionario persisteFuncionario(Funcionario funcionario) {
+    private Funcionario persistirFuncionario(Funcionario funcionario) {
         log.info("[inicio] FuncionarioApplicationService - persisteFuncionario");
         Funcionario funcionarioSalvo = funcionarioRepository.salvarFuncionario(funcionario).orElseThrow(
                 () -> APIException.build(HttpStatus.INTERNAL_SERVER_ERROR, "Erro ao salvar funcionario"));
