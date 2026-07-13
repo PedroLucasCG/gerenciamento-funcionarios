@@ -22,8 +22,8 @@ public class FuncionarioHashMapRepository implements FuncionarioRepository {
     @Override
     public List<Funcionario> todosFuncionarios() {
         log.info("[inicio] FuncionarioHashMapRepository - todosFuncionarios");
-        
+        List<Funcionario> funcionariosList = new ArrayList<>(funcionarios.values());
         log.info("[finaliza] FuncionarioHashMapRepository - todosFuncionarios");
-        return List.of();
+        return funcionariosList;
     }
 }
