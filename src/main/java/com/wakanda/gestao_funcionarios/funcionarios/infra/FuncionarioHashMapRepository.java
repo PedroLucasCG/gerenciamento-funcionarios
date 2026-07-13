@@ -35,4 +35,11 @@ public class FuncionarioHashMapRepository implements FuncionarioRepository {
         log.info("[finaliza] FuncionarioHashMapRepository - retornarFuncionarioPorId");
         return funcionario;
     }
+
+    @Override
+    public void deletarFuncionario(Funcionario funcionario) {
+        log.info("[inicio] FuncionarioHashMapRepository - deletarFuncionario");
+        funcionarios.remove(funcionario.getId());
+        log.info("[finaliza] FuncionarioHashMapRepository - deletarFuncionario");
+    }
 }

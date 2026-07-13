@@ -12,4 +12,6 @@ public interface FuncionarioRepository {
     List<Funcionario> todosFuncionarios();
 
     Optional<Funcionario> retornarFuncionarioPorId(UUID idFuncionario);
+
+    void deletarFuncionario(Funcionario funcionario);
 }
