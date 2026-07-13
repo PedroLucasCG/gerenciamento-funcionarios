@@ -3,6 +3,7 @@ package com.wakanda.gestao_funcionarios.funcionarios.application.service;
 import com.wakanda.gestao_funcionarios.funcionarios.application.api.FuncionarioSalvarRequest;
 import com.wakanda.gestao_funcionarios.funcionarios.application.api.FuncionarioSalvoResponse;
 import com.wakanda.gestao_funcionarios.funcionarios.application.api.FuncionarioSimpleResponse;
+import com.wakanda.gestao_funcionarios.funcionarios.application.api.FuncionarioSingleResponse;
 import com.wakanda.gestao_funcionarios.funcionarios.domain.Funcionario;
 import com.wakanda.gestao_funcionarios.funcionarios.infra.FuncionarioRepository;
 import com.wakanda.gestao_funcionarios.handler.APIException;
@@ -12,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Log4j2
 @RequiredArgsConstructor
@@ -38,5 +40,16 @@ public class FuncionarioApplicationService implements FuncionarioService {
                 = FuncionarioSimpleResponse.converter(funcionarios);
         log.info("[finaliza] FuncionarioApplicationService - retornarTodosFuncionarios");
         return funcionarioSimpleResponses;
+    }
+
+    @Override
+    public FuncionarioSingleResponse retornarFuncionario(UUID idFuncionario) {
+        log.info("[inicio] FuncionarioApplicationService - retornarFuncionario");
+        Funcionario funcionario = funcionarioRepository.retornarFuncionarioPorId(idFuncionario).orElseThrow(
+                () -> APIException.build(HttpStatus.NOT_FOUND, "Funcionario não encontrado"));
+        FuncionarioSingleResponse funcionarioSingleResponse
+                = new FuncionarioSingleResponse(funcionario);
+        log.info("[finaliza] FuncionarioApplicationService - retornarFuncionario");
+        return funcionarioSingleResponse;
     }
 }

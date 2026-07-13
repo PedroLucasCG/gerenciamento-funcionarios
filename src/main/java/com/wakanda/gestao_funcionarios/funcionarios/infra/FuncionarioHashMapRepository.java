@@ -26,4 +26,13 @@ public class FuncionarioHashMapRepository implements FuncionarioRepository {
         log.info("[finaliza] FuncionarioHashMapRepository - todosFuncionarios");
         return funcionariosList;
     }
+
+    @Override
+    public Optional<Funcionario> retornarFuncionarioPorId(UUID idFuncionario) {
+        log.info("[inicio] FuncionarioHashMapRepository - retornarFuncionarioPorId");
+        Optional<Funcionario> funcionario
+                = Optional.ofNullable(funcionarios.getOrDefault(idFuncionario, null));
+        log.info("[finaliza] FuncionarioHashMapRepository - retornarFuncionarioPorId");
+        return funcionario;
+    }
 }
