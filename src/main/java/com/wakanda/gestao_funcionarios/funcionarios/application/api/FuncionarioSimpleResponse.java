@@ -7,7 +7,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Getter
 @NoArgsConstructor
@@ -25,5 +27,11 @@ public class FuncionarioSimpleResponse {
         this.designacao = funcionario.getDesignacao();
         this.salario = funcionario.getSalario();
         this.endereco = funcionario.getEndereco();
+    }
+
+    public static List<FuncionarioSimpleResponse> converter(List<Funcionario> funcionarios) {
+        return funcionarios.stream()
+                .map(FuncionarioSimpleResponse::new)
+                .collect(Collectors.toList());
     }
 }

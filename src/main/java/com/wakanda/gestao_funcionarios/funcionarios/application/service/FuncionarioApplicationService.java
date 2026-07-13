@@ -32,6 +32,11 @@ public class FuncionarioApplicationService implements FuncionarioService {
 
     @Override
     public List<FuncionarioSimpleResponse> retornarTodosFuncionarios() {
-        return List.of();
+        log.info("[inicio] FuncionarioApplicationService - retornarTodosFuncionarios");
+        List<Funcionario> funcionarios = funcionarioRepository.todosFuncionarios();
+        List<FuncionarioSimpleResponse> funcionarioSimpleResponses
+                = FuncionarioSimpleResponse.converter(funcionarios);
+        log.info("[finaliza] FuncionarioApplicationService - retornarTodosFuncionarios");
+        return funcionarioSimpleResponses;
     }
 }

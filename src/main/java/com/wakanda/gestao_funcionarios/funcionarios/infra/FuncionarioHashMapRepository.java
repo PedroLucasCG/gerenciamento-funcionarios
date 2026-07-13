@@ -4,10 +4,7 @@ import com.wakanda.gestao_funcionarios.funcionarios.domain.Funcionario;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Repository;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 @Log4j2
 @Repository
@@ -20,5 +17,13 @@ public class FuncionarioHashMapRepository implements FuncionarioRepository {
         funcionarios.put(funcionario.getId(), funcionario);
         log.info("[finaliza] FuncionarioRepositoryImpl - salvarFuncionario");
         return Optional.ofNullable(funcionarios.getOrDefault(funcionario.getId(), null));
+    }
+
+    @Override
+    public List<Funcionario> todosFuncionarios() {
+        log.info("[inicio] FuncionarioHashMapRepository - todosFuncionarios");
+        
+        log.info("[finaliza] FuncionarioHashMapRepository - todosFuncionarios");
+        return List.of();
     }
 }
