@@ -18,5 +18,9 @@ public class Funcionario {
 
     public Funcionario(FuncionarioSalvarRequest  funcionarioSalvarRequest) {
         this.id = UUID.randomUUID();
+        this.nome = funcionarioSalvarRequest.getNome();
+        this.designacao = funcionarioSalvarRequest.getDesignacao();
+        this.salario = funcionarioSalvarRequest.getSalario();
+        this.endereco = new Endereco(funcionarioSalvarRequest);
     }
 }
