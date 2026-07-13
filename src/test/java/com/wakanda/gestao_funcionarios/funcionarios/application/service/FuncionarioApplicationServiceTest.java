@@ -4,6 +4,7 @@ import com.wakanda.gestao_funcionarios.DataHelper;
 import com.wakanda.gestao_funcionarios.funcionarios.application.api.FuncionarioSalvarRequest;
 import com.wakanda.gestao_funcionarios.funcionarios.application.api.FuncionarioSalvoResponse;
 import com.wakanda.gestao_funcionarios.funcionarios.application.api.FuncionarioSimpleResponse;
+import com.wakanda.gestao_funcionarios.funcionarios.application.api.FuncionarioSingleResponse;
 import com.wakanda.gestao_funcionarios.funcionarios.domain.Funcionario;
 import com.wakanda.gestao_funcionarios.funcionarios.infra.FuncionarioRepository;
 import com.wakanda.gestao_funcionarios.handler.APIException;
@@ -75,6 +76,13 @@ class FuncionarioApplicationServiceTest {
     @Test
     void retornarFuncionarioSingularComSucesso() {
         Funcionario funcionario = DataHelper.createFuncionario();
+        FuncionarioSingleResponse funcionarioSingleResponse = DataHelper.createFuncionarioSingleResponse();
 
+        when(funcionarioRepository.retornarFuncionarioPorId(any())).thenReturn(Optional.of(funcionario));
+
+        FuncionarioSingleResponse funcionarioResponse = service.retornarFuncionario(funcionario.getId());
+
+        verify(funcionarioRepository, times(1)).retornarFuncionarioPorId(any());
+        assertEquals(funcionarioResponse.getId(), funcionarioSingleResponse.getId());
     }
 }

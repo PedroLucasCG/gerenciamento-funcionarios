@@ -2,6 +2,7 @@ package com.wakanda.gestao_funcionarios;
 
 import com.wakanda.gestao_funcionarios.funcionarios.application.api.FuncionarioSalvarRequest;
 import com.wakanda.gestao_funcionarios.funcionarios.application.api.FuncionarioSalvoResponse;
+import com.wakanda.gestao_funcionarios.funcionarios.application.api.FuncionarioSingleResponse;
 import com.wakanda.gestao_funcionarios.funcionarios.domain.Funcionario;
 
 import java.util.ArrayList;
@@ -30,5 +31,9 @@ public class DataHelper {
         funcionarios.add(DataHelper.createFuncionario());
 
         return funcionarios;
+    }
+
+    public static FuncionarioSingleResponse createFuncionarioSingleResponse() {
+        return new FuncionarioSingleResponse(createFuncionario());
     }
 }
