@@ -2,6 +2,8 @@ package funcionarios.infra;
 
 import funcionarios.domain.Funcionario;
 
+import java.util.Optional;
+
 public interface FuncionarioRepository {
-    Funcionario salvarFuncionario(Funcionario funcionario);
+    Optional<Funcionario> salvarFuncionario(Funcionario funcionario);
 }

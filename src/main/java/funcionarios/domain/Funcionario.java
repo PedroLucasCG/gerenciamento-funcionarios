@@ -1,5 +1,6 @@
 package funcionarios.domain;
 
+import funcionarios.application.api.FuncionarioSalvarRequest;
 import lombok.*;
 
 import java.util.UUID;
@@ -14,4 +15,8 @@ public class Funcionario {
     private Designacao designacao;
     private Double salario;
     private Endereco endereco;
+
+    public Funcionario(FuncionarioSalvarRequest  funcionarioSalvarRequest) {
+        this.id = UUID.randomUUID();
+    }
 }
