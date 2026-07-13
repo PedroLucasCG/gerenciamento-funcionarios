@@ -1,7 +1,8 @@
-package funcionarios.infra;
+package com.wakanda.gestao_funcionarios.funcionarios.infra;
 
-import funcionarios.domain.Funcionario;
+import com.wakanda.gestao_funcionarios.funcionarios.domain.Funcionario;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -9,7 +10,8 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Log4j2
-public class FuncionarioRepositoryImpl implements FuncionarioRepository {
+@Repository
+public class FuncionarioHashMapRepository implements FuncionarioRepository {
     Map<UUID, Funcionario> funcionarios = new HashMap<>();
 
     @Override

@@ -1,9 +1,9 @@
-package funcionarios.application.service;
+package com.wakanda.gestao_funcionarios.funcionarios.application.service;
 
-import funcionarios.application.api.FuncionarioSalvarRequest;
-import funcionarios.application.api.FuncionarioSalvoResponse;
-import funcionarios.domain.Funcionario;
-import funcionarios.infra.FuncionarioRepository;
+import com.wakanda.gestao_funcionarios.funcionarios.application.api.FuncionarioSalvarRequest;
+import com.wakanda.gestao_funcionarios.funcionarios.application.api.FuncionarioSalvoResponse;
+import com.wakanda.gestao_funcionarios.funcionarios.domain.Funcionario;
+import com.wakanda.gestao_funcionarios.funcionarios.infra.FuncionarioRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;

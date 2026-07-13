@@ -1,6 +1,6 @@
-package funcionarios.domain;
+package com.wakanda.gestao_funcionarios.funcionarios.domain;
 
-import funcionarios.application.api.FuncionarioSalvarRequest;
+import com.wakanda.gestao_funcionarios.funcionarios.application.api.FuncionarioSalvarRequest;
 import lombok.*;
 
 import java.util.UUID;

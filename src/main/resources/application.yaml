@@ -1,3 +1,14 @@
+server:
+  servlet:
+    context-path: /gerenciamento-funcionarios/api
+
 spring:
   application:
-    name: demo
+    name: gerenciamento-funcionarios
+
+springdoc:
+  swagger-ui:
+    enabled: true
+    path: /public/swagger
+  api-docs:
+    enabled: true

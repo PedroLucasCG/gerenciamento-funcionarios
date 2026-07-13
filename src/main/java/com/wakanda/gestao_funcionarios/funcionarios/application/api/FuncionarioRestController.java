@@ -1,6 +1,6 @@
-package funcionarios.application.api;
+package com.wakanda.gestao_funcionarios.funcionarios.application.api;
 
-import funcionarios.application.service.FuncionarioService;
+import com.wakanda.gestao_funcionarios.funcionarios.application.service.FuncionarioService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.web.bind.annotation.RestController;

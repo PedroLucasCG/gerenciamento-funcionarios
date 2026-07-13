@@ -1,6 +1,6 @@
-package funcionarios.application.api;
+package com.wakanda.gestao_funcionarios.funcionarios.application.api;
 
-import funcionarios.domain.Designacao;
+import com.wakanda.gestao_funcionarios.funcionarios.domain.Designacao;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
