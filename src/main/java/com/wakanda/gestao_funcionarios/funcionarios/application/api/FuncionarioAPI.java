@@ -24,5 +24,11 @@ public interface FuncionarioAPI {
 
     @PatchMapping(value = "/{idFuncionario}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    void atualizarFuncionario(@PathVariable UUID idFuncionario, @RequestBody FuncionarioAtualizarRequest funcionarioAtualizarRequest);
+    void atualizarFuncionario(
+            @PathVariable UUID idFuncionario,
+            @RequestBody FuncionarioAtualizarRequest funcionarioAtualizarRequest);
+
+    @DeleteMapping(value = "/{idFuncionario}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    void deletarFuncionario(@PathVariable UUID idFuncionario);
 }

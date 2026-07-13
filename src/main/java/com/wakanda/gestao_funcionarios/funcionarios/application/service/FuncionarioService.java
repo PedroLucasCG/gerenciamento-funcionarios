@@ -15,4 +15,6 @@ public interface FuncionarioService {
     FuncionarioSingleResponse retornarFuncionario(UUID idFuncionario);
 
     Funcionario atualizarFuncionario(UUID idFuncionario, FuncionarioAtualizarRequest funcionarioAtualizarRequest);
+
+    Funcionario deletarFuncionario(UUID idFuncionario);
 }
