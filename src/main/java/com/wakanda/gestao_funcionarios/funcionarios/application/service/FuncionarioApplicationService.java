@@ -21,9 +21,7 @@ public class FuncionarioApplicationService implements FuncionarioService {
     public FuncionarioSalvoResponse salvarFuncionario(FuncionarioSalvarRequest funcionarioSalvarRequest) {
         log.info("[inicio] FuncionarioApplicationService - salvarFuncionario");
         Funcionario funcionario = new Funcionario(funcionarioSalvarRequest);
-        Funcionario funcionarioSalvo = funcionarioRepository.salvarFuncionario(funcionario).orElseThrow(
-                () -> APIException.build(HttpStatus.INTERNAL_SERVER_ERROR, "Erro ao salvar funcionario"));
-
+        Funcionario funcionarioSalvo = persisteFuncionario(funcionario);
         FuncionarioSalvoResponse funcionarioSalvoResponse = new FuncionarioSalvoResponse(funcionarioSalvo);
         log.info("[finaliza] FuncionarioApplicationService - salvarFuncionario");
         return funcionarioSalvoResponse;
@@ -42,8 +40,7 @@ public class FuncionarioApplicationService implements FuncionarioService {
     @Override
     public FuncionarioSingleResponse retornarFuncionario(UUID idFuncionario) {
         log.info("[inicio] FuncionarioApplicationService - retornarFuncionario");
-        Funcionario funcionario = funcionarioRepository.retornarFuncionarioPorId(idFuncionario).orElseThrow(
-                () -> APIException.build(HttpStatus.NOT_FOUND, "Funcionario não encontrado"));
+        Funcionario funcionario = encontrarFuncionario(idFuncionario);
         FuncionarioSingleResponse funcionarioSingleResponse
                 = new FuncionarioSingleResponse(funcionario);
         log.info("[finaliza] FuncionarioApplicationService - retornarFuncionario");
@@ -53,10 +50,25 @@ public class FuncionarioApplicationService implements FuncionarioService {
     @Override
     public Funcionario atualizarFuncionario(UUID idFuncionario, FuncionarioAtualizarRequest funcionarioAtualizarRequest) {
         log.info("[inicio] FuncionarioApplicationService - atualizarFuncionario");
-        Funcionario funcionario = funcionarioRepository.retornarFuncionarioPorId(idFuncionario).orElseThrow(
-                () -> APIException.build(HttpStatus.NOT_FOUND, "Funcionario não encontrado"));
+        Funcionario funcionario = encontrarFuncionario(idFuncionario);
         funcionario.atualizar(funcionarioAtualizarRequest);
         log.info("[finaliza] FuncionarioApplicationService - atualizarFuncionario");
         return null;
+    }
+
+    private Funcionario persisteFuncionario(Funcionario funcionario) {
+        log.info("[inicio] FuncionarioApplicationService - persisteFuncionario");
+        Funcionario funcionarioSalvo = funcionarioRepository.salvarFuncionario(funcionario).orElseThrow(
+                () -> APIException.build(HttpStatus.INTERNAL_SERVER_ERROR, "Erro ao salvar funcionario"));
+        log.info("[finaliza] FuncionarioApplicationService - persisteFuncionario");
+        return funcionarioSalvo;
+    }
+
+    private Funcionario encontrarFuncionario(UUID idFuncionario) {
+        log.info("[inicio] FuncionarioApplicationService - encontrarFuncionario");
+        Funcionario funcionario = funcionarioRepository.retornarFuncionarioPorId(idFuncionario).orElseThrow(
+                () -> APIException.build(HttpStatus.NOT_FOUND, "Funcionario não encontrado"));
+        log.info("[finaliza] FuncionarioApplicationService - encontrarFuncionario");
+        return funcionario;
     }
 }

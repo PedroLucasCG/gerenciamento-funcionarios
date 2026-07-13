@@ -34,7 +34,7 @@ class FuncionarioApplicationServiceTest {
     private FuncionarioRepository funcionarioRepository;
 
     @Test
-    void salvarFuncionarioComSucesso() {
+    void persisteFuncionarioComSucesso() {
         Funcionario funcionario = DataHelper.createFuncionario();
         FuncionarioSalvarRequest funcionarioSalvarRequest = DataHelper.createFuncionarioSalvarRequest();
         FuncionarioSalvoResponse funcionarioSalvoResponse = DataHelper.createFuncionarioSalvoResponse();
@@ -48,7 +48,7 @@ class FuncionarioApplicationServiceTest {
     }
 
     @Test
-    void errao500NoSalvarFuncionario() {
+    void erro500NoSalvarFuncionario() {
         FuncionarioSalvarRequest funcionarioSalvarRequest = DataHelper.createFuncionarioSalvarRequest();
 
         when(funcionarioRepository.salvarFuncionario(any())).thenReturn(Optional.empty());
