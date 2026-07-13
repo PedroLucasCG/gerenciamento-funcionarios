@@ -1,5 +1,6 @@
 package com.wakanda.gestao_funcionarios.funcionarios.domain;
 
+import com.wakanda.gestao_funcionarios.funcionarios.application.api.FuncionarioAtualizarRequest;
 import com.wakanda.gestao_funcionarios.funcionarios.application.api.FuncionarioSalvarRequest;
 import lombok.*;
 
@@ -22,5 +23,12 @@ public class Funcionario {
         this.designacao = funcionarioSalvarRequest.getDesignacao();
         this.salario = funcionarioSalvarRequest.getSalario();
         this.endereco = new Endereco(funcionarioSalvarRequest);
+    }
+
+    public void atualizar(FuncionarioAtualizarRequest funcionarioAtualizarRequest) {
+        this.nome = funcionarioAtualizarRequest.getNome();
+        this.designacao = funcionarioAtualizarRequest.getDesignacao();
+        this.salario = funcionarioAtualizarRequest.getSalario();
+        this.endereco.atualizar(funcionarioAtualizarRequest);
     }
 }

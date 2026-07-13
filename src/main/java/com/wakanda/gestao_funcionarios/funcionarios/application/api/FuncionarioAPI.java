@@ -21,4 +21,8 @@ public interface FuncionarioAPI {
     @GetMapping(value = "/{idFuncionario}")
     @ResponseStatus(HttpStatus.OK)
     FuncionarioSingleResponse recuperarFuncionarioUnico(@PathVariable UUID idFuncionario);
+
+    @PatchMapping(value = "/{idFuncionario}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    void atualizarFuncionario(@PathVariable UUID idFuncionario, @RequestBody FuncionarioAtualizarRequest funcionarioAtualizarRequest);
 }

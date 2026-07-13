@@ -40,4 +40,12 @@ public class FuncionarioRestController implements FuncionarioAPI {
         log.info("[finaliza] FuncionarioRestController - recuperarFuncionarioUnico");
         return funcionarioSingleResponse;
     }
+
+    @Override
+    public void atualizarFuncionario(UUID idFuncionario, FuncionarioAtualizarRequest funcionarioAtualizarRequest) {
+        log.info("[inicio] FuncionarioRestController - atualizarFuncionario");
+        funcionarioApplicationService.atualizarFuncionario(idFuncionario, funcionarioAtualizarRequest);
+        log.info("[finaliza] FuncionarioRestController - atualizarFuncionario");
+    }
+
 }

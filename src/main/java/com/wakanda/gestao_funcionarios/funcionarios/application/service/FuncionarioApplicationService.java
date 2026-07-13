@@ -1,9 +1,6 @@
 package com.wakanda.gestao_funcionarios.funcionarios.application.service;
 
-import com.wakanda.gestao_funcionarios.funcionarios.application.api.FuncionarioSalvarRequest;
-import com.wakanda.gestao_funcionarios.funcionarios.application.api.FuncionarioSalvoResponse;
-import com.wakanda.gestao_funcionarios.funcionarios.application.api.FuncionarioSimpleResponse;
-import com.wakanda.gestao_funcionarios.funcionarios.application.api.FuncionarioSingleResponse;
+import com.wakanda.gestao_funcionarios.funcionarios.application.api.*;
 import com.wakanda.gestao_funcionarios.funcionarios.domain.Funcionario;
 import com.wakanda.gestao_funcionarios.funcionarios.infra.FuncionarioRepository;
 import com.wakanda.gestao_funcionarios.handler.APIException;
@@ -51,5 +48,15 @@ public class FuncionarioApplicationService implements FuncionarioService {
                 = new FuncionarioSingleResponse(funcionario);
         log.info("[finaliza] FuncionarioApplicationService - retornarFuncionario");
         return funcionarioSingleResponse;
+    }
+
+    @Override
+    public Funcionario atualizarFuncionario(UUID idFuncionario, FuncionarioAtualizarRequest funcionarioAtualizarRequest) {
+        log.info("[inicio] FuncionarioApplicationService - atualizarFuncionario");
+        Funcionario funcionario = funcionarioRepository.retornarFuncionarioPorId(idFuncionario).orElseThrow(
+                () -> APIException.build(HttpStatus.NOT_FOUND, "Funcionario não encontrado"));
+        funcionario.atualizar(funcionarioAtualizarRequest);
+        log.info("[finaliza] FuncionarioApplicationService - atualizarFuncionario");
+        return null;
     }
 }
