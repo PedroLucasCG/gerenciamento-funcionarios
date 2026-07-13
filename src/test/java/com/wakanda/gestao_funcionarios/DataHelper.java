@@ -1,5 +1,6 @@
 package com.wakanda.gestao_funcionarios;
 
+import com.wakanda.gestao_funcionarios.funcionarios.application.api.FuncionarioAtualizarRequest;
 import com.wakanda.gestao_funcionarios.funcionarios.application.api.FuncionarioSalvarRequest;
 import com.wakanda.gestao_funcionarios.funcionarios.application.api.FuncionarioSalvoResponse;
 import com.wakanda.gestao_funcionarios.funcionarios.application.api.FuncionarioSingleResponse;
@@ -35,5 +36,9 @@ public class DataHelper {
 
     public static FuncionarioSingleResponse createFuncionarioSingleResponse() {
         return new FuncionarioSingleResponse(createFuncionario());
+    }
+
+    public static FuncionarioAtualizarRequest createFuncionarioAtualizarRequest() {
+        return FuncionarioAtualizarRequest.builder().nome(createFuncionario().getNome()).build();
     }
 }

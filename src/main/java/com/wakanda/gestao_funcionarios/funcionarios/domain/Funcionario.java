@@ -29,6 +29,14 @@ public class Funcionario {
         this.nome = funcionarioAtualizarRequest.getNome();
         this.designacao = funcionarioAtualizarRequest.getDesignacao();
         this.salario = funcionarioAtualizarRequest.getSalario();
+        atualizarEndereco(funcionarioAtualizarRequest);
+    }
+
+    private void atualizarEndereco(FuncionarioAtualizarRequest funcionarioAtualizarRequest) {
+        if (this.endereco == null) {
+            this.endereco = new Endereco(funcionarioAtualizarRequest);
+            return;
+        }
         this.endereco.atualizar(funcionarioAtualizarRequest);
     }
 }

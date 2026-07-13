@@ -25,6 +25,15 @@ public class Endereco {
         this.estado = funcionarioSalvarRequest.getEstado();
     }
 
+    public Endereco(FuncionarioAtualizarRequest funcionarioAtualizarRequest) {
+        this.cep = funcionarioAtualizarRequest.getCep();
+        this.logradouro = funcionarioAtualizarRequest.getLogradouro();
+        this.complemento = funcionarioAtualizarRequest.getComplemento();
+        this.bairro = funcionarioAtualizarRequest.getBairro();
+        this.cidade = funcionarioAtualizarRequest.getCidade();
+        this.estado = funcionarioAtualizarRequest.getEstado();
+    }
+
     public void atualizar(FuncionarioAtualizarRequest funcionarioAtualizarRequest) {
         this.cep = funcionarioAtualizarRequest.getCep();
         this.logradouro = funcionarioAtualizarRequest.getLogradouro();

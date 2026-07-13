@@ -1,14 +1,10 @@
 package com.wakanda.gestao_funcionarios.funcionarios.application.service;
 
 import com.wakanda.gestao_funcionarios.DataHelper;
-import com.wakanda.gestao_funcionarios.funcionarios.application.api.FuncionarioSalvarRequest;
-import com.wakanda.gestao_funcionarios.funcionarios.application.api.FuncionarioSalvoResponse;
-import com.wakanda.gestao_funcionarios.funcionarios.application.api.FuncionarioSimpleResponse;
-import com.wakanda.gestao_funcionarios.funcionarios.application.api.FuncionarioSingleResponse;
+import com.wakanda.gestao_funcionarios.funcionarios.application.api.*;
 import com.wakanda.gestao_funcionarios.funcionarios.domain.Funcionario;
 import com.wakanda.gestao_funcionarios.funcionarios.infra.FuncionarioRepository;
 import com.wakanda.gestao_funcionarios.handler.APIException;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -16,7 +12,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -98,5 +93,20 @@ class FuncionarioApplicationServiceTest {
 
         verify(funcionarioRepository, times(1)).retornarFuncionarioPorId(any());
         assertEquals(HttpStatus.NOT_FOUND, exception.getStatusException());
+    }
+
+    @Test
+    void atualizarFuncionarioComSucesso() {
+        Funcionario funcionario = DataHelper.createFuncionario();
+        FuncionarioAtualizarRequest funcionarioAtualizarRequest = DataHelper.createFuncionarioAtualizarRequest();
+
+        when(funcionarioRepository.retornarFuncionarioPorId(any())).thenReturn(Optional.of(funcionario));
+        when(funcionarioRepository.salvarFuncionario(any())).thenReturn(Optional.of(funcionario));
+
+        Funcionario funcionarioRetorno = service.atualizarFuncionario(funcionario.getId(), funcionarioAtualizarRequest);
+
+        verify(funcionarioRepository, times(1)).salvarFuncionario(any());
+        verify(funcionarioRepository, times(1)).retornarFuncionarioPorId(any());
+        assertEquals(funcionarioRetorno.getNome(), funcionarioAtualizarRequest.getNome());
     }
 }
