@@ -4,6 +4,8 @@ import com.wakanda.gestao_funcionarios.funcionarios.application.api.FuncionarioS
 import com.wakanda.gestao_funcionarios.funcionarios.application.api.FuncionarioSalvoResponse;
 import com.wakanda.gestao_funcionarios.funcionarios.domain.Funcionario;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 public class DataHelper {
@@ -19,5 +21,14 @@ public class DataHelper {
 
     public static FuncionarioSalvoResponse createFuncionarioSalvoResponse() {
         return new FuncionarioSalvoResponse(createFuncionario());
+    }
+
+    public static List<Funcionario> createFuncionarios() {
+        List<Funcionario> funcionarios = new ArrayList<>();
+        funcionarios.add(DataHelper.createFuncionario());
+        funcionarios.add(DataHelper.createFuncionario());
+        funcionarios.add(DataHelper.createFuncionario());
+
+        return funcionarios;
     }
 }

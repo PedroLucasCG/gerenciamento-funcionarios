@@ -61,10 +61,7 @@ class FuncionarioApplicationServiceTest {
 
     @Test
     void retornarTodosFuncionariosComSucesso() {
-        List<Funcionario> funcionarios = new ArrayList<>();
-        funcionarios.add(DataHelper.createFuncionario());
-        funcionarios.add(DataHelper.createFuncionario());
-        funcionarios.add(DataHelper.createFuncionario());
+        List<Funcionario> funcionarios = DataHelper.createFuncionarios();
 
         when(funcionarioRepository.todosFuncionarios()).thenReturn(funcionarios);
         List<FuncionarioSimpleResponse> funcionarioSimpleResponses
@@ -73,5 +70,11 @@ class FuncionarioApplicationServiceTest {
         verify(funcionarioRepository, times(1)).todosFuncionarios();
         assertEquals(funcionarioSimpleResponses.get(0).getNome(), funcionarioSimpleResponses.get(0).getNome());
         assertEquals(funcionarioSimpleResponses.size(), funcionarioSimpleResponses.size());
+    }
+
+    @Test
+    void retornarFuncionarioSingularComSucesso() {
+        Funcionario funcionario = DataHelper.createFuncionario();
+
     }
 }
