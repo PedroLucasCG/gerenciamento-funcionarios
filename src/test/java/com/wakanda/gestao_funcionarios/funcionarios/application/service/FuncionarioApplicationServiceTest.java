@@ -3,9 +3,11 @@ package com.wakanda.gestao_funcionarios.funcionarios.application.service;
 import com.wakanda.gestao_funcionarios.DataHelper;
 import com.wakanda.gestao_funcionarios.funcionarios.application.api.FuncionarioSalvarRequest;
 import com.wakanda.gestao_funcionarios.funcionarios.application.api.FuncionarioSalvoResponse;
+import com.wakanda.gestao_funcionarios.funcionarios.application.api.FuncionarioSimpleResponse;
 import com.wakanda.gestao_funcionarios.funcionarios.domain.Funcionario;
 import com.wakanda.gestao_funcionarios.funcionarios.infra.FuncionarioRepository;
 import com.wakanda.gestao_funcionarios.handler.APIException;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -13,6 +15,8 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -53,5 +57,21 @@ class FuncionarioApplicationServiceTest {
 
         verify(funcionarioRepository, times(1)).salvarFuncionario(any());
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, exception.getStatusException());
+    }
+
+    @Test
+    void retornarTodosFuncionariosComSucesso() {
+        List<Funcionario> funcionarios = new ArrayList<>();
+        funcionarios.add(DataHelper.createFuncionario());
+        funcionarios.add(DataHelper.createFuncionario());
+        funcionarios.add(DataHelper.createFuncionario());
+
+        when(funcionarioRepository.todosFuncionarios()).thenReturn(funcionarios);
+        List<FuncionarioSimpleResponse> funcionarioSimpleResponses
+                = service.retornarTodosFuncionarios();
+
+        verify(funcionarioRepository, times(1)).todosFuncionarios();
+        assertEquals(funcionarioSimpleResponses.get(0).getNome(), funcionarioSimpleResponses.get(0).getNome());
+        assertEquals(funcionarioSimpleResponses.size(), funcionarioSimpleResponses.size());
     }
 }
