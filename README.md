@@ -8,6 +8,9 @@ Essa API conta com endpoints para fazer o CRUD básico na entidade funcionários
 * PATCH v1/funcionario/:idFuncionario - atualiza o funcionário passado por id
 * DELETE v1/funcionario/:idFuncionario - deleta o funcionário passado por id
 
+Para acessar a documentação OpenAPI acessar o endpoint no navegador:
+* GET /public/swagger
+
 # Sobre a API
 
 - A API foi construída usando Java Spring Boot
