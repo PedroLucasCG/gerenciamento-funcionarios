@@ -155,4 +155,18 @@ class FuncionarioApplicationServiceTest {
         verify(funcionarioRepository, times(1)).retornarFuncionarioPorId(any());
         assertEquals(funcionarioRetorno.getId(), funcionario.getId());
     }
+
+    @Test
+    void deletarFuncionarioComErro() {
+        Funcionario funcionario = DataHelper.createFuncionario();
+
+        when(funcionarioRepository.retornarFuncionarioPorId(any())).thenReturn(Optional.empty());
+
+        APIException exception = assertThrows(APIException.class, () -> {
+            service.deletarFuncionario(funcionario.getId());
+        });
+
+        verify(funcionarioRepository, times(1)).retornarFuncionarioPorId(any());
+        assertEquals(HttpStatus.NOT_FOUND, exception.getStatusException());
+    }
 }
