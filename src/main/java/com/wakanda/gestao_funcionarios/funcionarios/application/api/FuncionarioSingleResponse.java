@@ -17,6 +17,7 @@ public class FuncionarioSingleResponse {
     private String nome;
     private Designacao designacao;
     private Double salario;
+    private String telefone;
     private Endereco endereco;
 
     public FuncionarioSingleResponse(Funcionario funcionario) {
@@ -24,6 +25,7 @@ public class FuncionarioSingleResponse {
         this.nome = funcionario.getNome();
         this.designacao = funcionario.getDesignacao();
         this.salario = funcionario.getSalario();
+        this.telefone = funcionario.getTelefone();
         this.endereco = funcionario.getEndereco();
     }
 }

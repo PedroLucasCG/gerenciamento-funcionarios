@@ -19,6 +19,7 @@ public class FuncionarioSimpleResponse {
     private String nome;
     private Designacao designacao;
     private Double salario;
+    private String telefone;
     private Endereco endereco;
 
     public FuncionarioSimpleResponse(Funcionario funcionario) {
@@ -26,6 +27,7 @@ public class FuncionarioSimpleResponse {
         this.nome = funcionario.getNome();
         this.designacao = funcionario.getDesignacao();
         this.salario = funcionario.getSalario();
+        this.telefone = funcionario.getTelefone();
         this.endereco = funcionario.getEndereco();
     }
 

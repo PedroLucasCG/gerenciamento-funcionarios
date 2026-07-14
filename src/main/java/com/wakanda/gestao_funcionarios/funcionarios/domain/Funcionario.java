@@ -15,6 +15,7 @@ public class Funcionario {
     private String nome;
     private Designacao designacao;
     private Double salario;
+    private String telefone;
     private Endereco endereco;
 
     public Funcionario(FuncionarioSalvarRequest  funcionarioSalvarRequest) {
@@ -22,6 +23,7 @@ public class Funcionario {
         this.nome = funcionarioSalvarRequest.getNome();
         this.designacao = funcionarioSalvarRequest.getDesignacao();
         this.salario = funcionarioSalvarRequest.getSalario();
+        this.telefone = funcionarioSalvarRequest.getTelefone();
         this.endereco = new Endereco(funcionarioSalvarRequest);
     }
 
@@ -29,6 +31,7 @@ public class Funcionario {
         this.nome = funcionarioAtualizarRequest.getNome();
         this.designacao = funcionarioAtualizarRequest.getDesignacao();
         this.salario = funcionarioAtualizarRequest.getSalario();
+        this.telefone = funcionarioAtualizarRequest.getTelefone();
         atualizarEndereco(funcionarioAtualizarRequest);
     }
 
